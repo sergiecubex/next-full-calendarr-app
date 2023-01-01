@@ -1,20 +1,37 @@
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/39449389/210178852-9f68ee05-d023-4684-8e51-5756df8e0161.png" height="130"/>
+</p>
+<p align="center">
+    <img src="https://img.shields.io/github/package-json/v/wellers0n/4fun-calendar?style=flat-square"/>
+    <img src="https://img.shields.io/github/last-commit/wellers0n/4fun-calendar?style=flat-square"/>
+    <a href="https://twitter.com/wellers0n_" target="_blank">
+        <img src="https://img.shields.io/twitter/url/https/wellers0n_.svg?style=social"/>
+    </a>
+</p>
 
-## Getting Started
+<p>
+   <h1 align="center">4fun-calendar</h1>
+<p/>
+    
+<br/>
 
-First, run the development server:
+## Node version
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Use node `v18.12.1`
+## Initing in the your PC
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- For clone the project `git clone https://github.com/Wellers0n/4fun-calendar.git`
+- Enter in the folder `cd 4fun-calendar/`
+- To install project dependency: `yarn`
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-## Deploy on Vercel
+## Listening in
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+port: `http://localhost:3000`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Stack used
+
+[ReactJS](https://reactjs.org/)<br/>
+[Yarn](https://yarnpkg.com/en/)<br/>
+[NextJS](https://nextjs.org/)<br/>
+[Full-Calendar](https://fullcalendar.io/)<br/>
