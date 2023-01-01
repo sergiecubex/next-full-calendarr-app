@@ -27,6 +27,8 @@ Use node `v18.12.1`
 
 ## Listening in
 
+run project: `yarn dev`
+
 port: `http://localhost:3000`
 
 ## Stack used
