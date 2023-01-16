@@ -3,23 +3,20 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { useRef, useState } from 'react';
-import { useRouter } from 'next/router'
 
 export default function Calendar() {
-  const router = useRouter()
-
   const start = new Date();
   const end = new Date(new Date().setMinutes(start.getMinutes() + 30));
 
   const data = [
     {
-      title: 'sala 1', start, end, backgroundColor: "green", extendedProps: { id: 1 }
+      title: 'Event 1', start, end, backgroundColor: "green", extendedProps: { id: 1 }
     },
     {
-      title: 'sala 2', start: new Date(new Date().setHours(start.getHours() + 1)), end: new Date(new Date().setHours(start.getHours() + 2)), backgroundColor: "purple", extendedProps: { id: 2 }
+      title: 'Event 2', start: new Date(new Date().setHours(start.getHours() + 1)), end: new Date(new Date().setHours(start.getHours() + 2)), backgroundColor: "purple", extendedProps: { id: 2 }
     },
     {
-      title: 'sala 3', start: new Date(new Date().setHours(start.getHours() + 2)), end: new Date(new Date().setHours(start.getHours() + 3)), backgroundColor: "#000", extendedProps: { id: 3 }
+      title: 'Event 3', start: new Date(new Date().setHours(start.getHours() + 2)), end: new Date(new Date().setHours(start.getHours() + 3)), backgroundColor: "#000", extendedProps: { id: 3 }
     }
   ]
 
@@ -78,36 +75,22 @@ export default function Calendar() {
           alert('selected ' + info.startStr + ' to ' + info.endStr);
         }}
         events={events}
-        locale={"pt-br"}
+        locale={"en-US"}
         timeZone={"UTF"}
         titleFormat={{ year: 'numeric', month: 'long' }}
         // allDayText={"24h"}
         allDaySlot={false}
         buttonText={{
-          today: 'Hoje',
-          month: 'Mês',
-          week: 'Semana',
-          day: 'Dia',
-          list: 'Lista'
-        }}
-        customButtons={{
-          custom1: {
-            text: 'custom 1',
-            click: function () {
-              alert('clicked custom button 1!');
-            }
-          },
-          custom2: {
-            text: 'About page',
-            click: function () {
-              router.push('/about')
-            }
-          }
+          today: 'Today',
+          month: 'Month',
+          week: 'Week',
+          day: 'Day',
+          list: 'List'
         }}
         headerToolbar={{
-          left: 'dayGridMonth,timeGridWeek,timeGridDay custom1',
+          left: 'dayGridMonth,timeGridWeek,timeGridDay',
           center: 'title',
-          right: 'custom2 today prevYear,prev,next,nextYear'
+          right: 'prevYear,prev,next,nextYear'
         }}
       />
     </div>
