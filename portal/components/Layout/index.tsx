@@ -1,7 +1,11 @@
 import { useState } from "react";
-import { AppstoreOutlined, MailOutlined } from "@ant-design/icons";
+import {
+  AppstoreOutlined,
+  MailOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Layout, Menu, theme } from "antd";
+import { Button, Layout, Menu, Space, Tooltip, theme } from "antd";
 import Calendar from "../Calendar";
 import Users from "../Users";
 
@@ -33,14 +37,26 @@ const AppLayout: React.FC = () => {
 
   return (
     <Layout>
-      <Header className="header">
+      <Header
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <Menu
+          style={{ width: "75%" }}
           theme="dark"
           onClick={onClick}
           selectedKeys={[current]}
           mode="horizontal"
           items={items}
         />
+        <Space>
+          <Tooltip title="logout">
+            <Button icon={<LogoutOutlined />} />
+          </Tooltip>
+        </Space>
       </Header>
       <Content style={{ padding: "0 50px" }}>
         <Layout style={{ padding: "24px 0", background: colorBgContainer }}>
