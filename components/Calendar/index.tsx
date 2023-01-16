@@ -5,7 +5,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/router'
 
-export default function Home() {
+export default function Calendar() {
   const router = useRouter()
 
   const start = new Date();
