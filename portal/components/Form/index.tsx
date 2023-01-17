@@ -17,7 +17,7 @@ const Login: React.FC = (props: any) => {
       return props.onCloseForm();
     } else if (props.editUser) {
       // @ts-ignore
-      dispatch(updateUser({...values, _id: props.editUser._id}));
+      dispatch(updateUser({ ...values, _id: props.editUser._id }));
       return props.onCloseForm();
     } else {
       // @ts-ignore
@@ -39,12 +39,11 @@ const Login: React.FC = (props: any) => {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
-      {props.addUser ||
-        (props.editUser && (
-          <Form.Item label="Name" name="name">
-            <Input />
-          </Form.Item>
-        ))}
+      {(props.addUser || props.editUser) && (
+        <Form.Item label="Name" name="name">
+          <Input />
+        </Form.Item>
+      )}
       <Form.Item
         label="Email"
         name="email"
@@ -56,7 +55,9 @@ const Login: React.FC = (props: any) => {
       <Form.Item
         label="Password"
         name="password"
-        rules={[{ required: !props.editUser, message: "Please input your password!" }]}
+        rules={[
+          { required: !props.editUser, message: "Please input your password!" },
+        ]}
       >
         <Input.Password />
       </Form.Item>
