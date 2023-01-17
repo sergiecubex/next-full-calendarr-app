@@ -7,7 +7,7 @@ const authController = require("../controllers/auth");
 const router = express.Router();
 
 router.put(
-  "/signup",
+  "/addUser",
   [
     body("email")
       .isEmail()
@@ -23,7 +23,18 @@ router.put(
     body("password").trim().isLength({ min: 5 }),
     body("name").trim().not().isEmpty(),
   ],
-  authController.signup
+  authController.addUser
+);
+
+router.put(
+  "/updateUser",
+  [
+    body("email")
+      .isEmail()
+      .withMessage("Please enter a valid email.")
+      .normalizeEmail()
+  ],
+  authController.updateUser
 );
 
 router.post("/login", authController.login);

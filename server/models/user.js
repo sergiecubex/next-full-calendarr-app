@@ -14,16 +14,6 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  status: {
-    type: String,
-    default: 'owner'
-  },
-  users: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    }
-  ],
   events: [
     {
       type: Schema.Types.ObjectId,

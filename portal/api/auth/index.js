@@ -1,6 +1,7 @@
 import login from "./login";
 import logout from "./logout";
-import signup from "./signup";
+import addUser from "./addUser";
 import getUsers from "./getUsers";
+import updateUser from "./updateUser";
 
-export { login, logout, signup, getUsers };
+export { login, logout, addUser, updateUser, getUsers };

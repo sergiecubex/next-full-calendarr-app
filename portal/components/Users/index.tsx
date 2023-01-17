@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Divider, List, Skeleton, Button } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getUsers, state } from "../../store/reducers/auth";
-import Form from "../Login";
+import Form from "../Form";
 
 interface DataType {
   _id: string;
@@ -17,6 +17,7 @@ const UsersPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<DataType[]>([]);
   const [addUser, setAddUser] = useState<boolean>(false);
+  const [editUser, setEditUser] = useState<DataType | null>(null);
 
   const loadMoreData = () => {
     if (loading) {
@@ -37,7 +38,10 @@ const UsersPage: React.FC = () => {
     }
   }, [usersList]);
 
-  if(addUser) return <Form addUser onAddUser={() => setAddUser(false)} />
+  if(addUser) return <Form addUser onCloseForm={() => setAddUser(false)} />
+  
+  if(editUser) return <Form editUser={editUser} onCloseForm={() => setEditUser(null)} />
+  
   return (
     <>
       <div
@@ -62,7 +66,7 @@ const UsersPage: React.FC = () => {
             renderItem={(item) => (
               <List.Item
                 key={item._id}
-                actions={[<a key="list-loadmore-edit">edit</a>]}
+                actions={[<a key="list-loadmore-edit" onClick={() => setEditUser(item)}>edit</a>]}
               >
                 <List.Item.Meta
                   title={<a>{item.name}</a>}

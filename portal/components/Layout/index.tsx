@@ -9,7 +9,7 @@ import { Button, Layout, Menu, Space, Tooltip, theme } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import Calendar from "../Calendar";
 import Users from "../Users";
-import Login from "../Login";
+import Form from "../Form";
 import { state, logOut } from "../../store/reducers/auth";
 
 const { Header, Content } = Layout;
@@ -70,7 +70,7 @@ const AppLayout: React.FC = () => {
       <Content style={{ padding: "0 50px" }}>
         <Layout style={{ padding: "24px 0", background: colorBgContainer }}>
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
-            {!isAuthenticated && <Login />}
+            {!isAuthenticated && <Form />}
             {isAuthenticated && current === "1" && <Calendar />}
             {isAuthenticated && current === "2" && <Users />}
           </Content>

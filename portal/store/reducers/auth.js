@@ -7,9 +7,12 @@ const initialState = {
   usersList: []
 };
 
-export const signup = createAsyncThunk("signup", async (query) => {
-  console.log(query)
-  return auth.signup(query);
+export const addUser = createAsyncThunk("addUser", async (query) => {
+  return auth.addUser(query);
+});
+
+export const updateUser = createAsyncThunk("updateUser", async (query) => {
+  return auth.updateUser(query);
 });
 
 export const login = createAsyncThunk("login", async (query) => {
@@ -32,9 +35,18 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(signup.fulfilled, (state, action) => {
+      .addCase(addUser.fulfilled, (state, action) => {
         if (action.payload.user) {
           state.usersList = [...state.usersList, action.payload.user];
+        }
+        if (action.payload.message) {
+          state.error = action.payload.message;
+        }
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        if (action.payload) {
+          const users = [...state.usersList, action.payload]
+          state.usersList = [...new Set(users)];
         }
         if (action.payload.message) {
           state.error = action.payload.message;
