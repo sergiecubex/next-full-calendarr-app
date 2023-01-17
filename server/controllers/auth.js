@@ -13,7 +13,7 @@ exports.signup = (req, res, next) => {
     throw error;
   }
   const email = req.body.email;
-  const name = req.body.name;
+  const name = req.body?.name || "";
   const password = req.body.password;
   bcrypt
     .hash(password, 12)
@@ -66,6 +66,20 @@ exports.login = (req, res, next) => {
         { expiresIn: "1h" }
       );
       res.status(200).json({ token: token, user: loadedUser });
+    })
+    .catch((err) => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
+
+exports.getUsers = (req, res, next) => {
+  User.find()
+    .select({ _id: 1, name: 1, email: 1 })
+    .then((result) => {
+      res.status(200).json({users: result});
     })
     .catch((err) => {
       if (!err.statusCode) {

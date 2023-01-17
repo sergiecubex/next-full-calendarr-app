@@ -3,13 +3,13 @@ const path = require('path');
 
 const { validationResult } = require('express-validator/check');
 
-const Document = require('../models/document');
+const Event = require('../models/event');
 
 exports.getPosts = (req, res, next) => {
   const currentPage = req.query.page || 1;
   const perPage = 2;
   let totalItems;
-  Document.find()
+  Event.find()
     .countDocuments()
     .then(count => {
       totalItems = count;
@@ -49,7 +49,7 @@ exports.createPost = (req, res, next) => {
   const imageUrl = req.file.path;
   const title = req.body.title;
   const content = req.body.content;
-  const post = new Document({
+  const post = new Event({
     title: title,
     content: content,
     imageUrl: imageUrl,
@@ -73,7 +73,7 @@ exports.createPost = (req, res, next) => {
 
 exports.getPost = (req, res, next) => {
   const postId = req.params.postId;
-  Document.findById(postId)
+  Event.findById(postId)
     .then(post => {
       if (!post) {
         const error = new Error('Could not find post.');
@@ -109,15 +109,12 @@ exports.updatePost = (req, res, next) => {
     error.statusCode = 422;
     throw error;
   }
-  Document.findById(postId)
+  Event.findById(postId)
     .then(post => {
       if (!post) {
         const error = new Error('Could not find post.');
         error.statusCode = 404;
         throw error;
-      }
-      if (imageUrl !== post.imageUrl) {
-        clearImage(post.imageUrl);
       }
       post.title = title;
       post.imageUrl = imageUrl;
@@ -137,15 +134,13 @@ exports.updatePost = (req, res, next) => {
 
 exports.deletePost = (req, res, next) => {
   const postId = req.params.postId;
-  Document.findById(postId)
+  Event.findById(postId)
     .then(post => {
       if (!post) {
         const error = new Error('Could not find post.');
         error.statusCode = 404;
         throw error;
       }
-      // Check logged in user
-      clearImage(post.imageUrl);
       return Document.findByIdAndRemove(postId);
     })
     .then(result => {
@@ -158,9 +153,4 @@ exports.deletePost = (req, res, next) => {
       }
       next(err);
     });
-};
-
-const clearImage = filePath => {
-  filePath = path.join(__dirname, '..', filePath);
-  fs.unlink(filePath, err => console.log(err));
 };

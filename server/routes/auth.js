@@ -28,4 +28,6 @@ router.put(
 
 router.post("/login", authController.login);
 
+router.get("/users", authController.getUsers);
+
 module.exports = router;

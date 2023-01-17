@@ -6,8 +6,11 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Button, Layout, Menu, Space, Tooltip, theme } from "antd";
+import { useSelector, useDispatch } from "react-redux";
 import Calendar from "../Calendar";
 import Users from "../Users";
+import Login from "../Login";
+import { state, logOut } from "../../store/reducers/auth";
 
 const { Header, Content } = Layout;
 
@@ -25,6 +28,8 @@ const items: MenuProps["items"] = [
 ];
 
 const AppLayout: React.FC = () => {
+  const { isAuthenticated } = useSelector(state);
+  const dispatch = useDispatch();
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -33,6 +38,10 @@ const AppLayout: React.FC = () => {
 
   const onClick: MenuProps["onClick"] = (e) => {
     setCurrent(e.key);
+  };
+
+  const logoutHandler = () => {
+    dispatch(logOut())
   };
 
   return (
@@ -52,17 +61,18 @@ const AppLayout: React.FC = () => {
           mode="horizontal"
           items={items}
         />
-        <Space>
+        {isAuthenticated && <Space>
           <Tooltip title="logout">
-            <Button icon={<LogoutOutlined />} />
+            <Button icon={<LogoutOutlined />} onClick={logoutHandler} />
           </Tooltip>
-        </Space>
+        </Space>}
       </Header>
       <Content style={{ padding: "0 50px" }}>
         <Layout style={{ padding: "24px 0", background: colorBgContainer }}>
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
-            {current === "1" && <Calendar />}
-            {current === "2" && <Users />}
+            {!isAuthenticated && <Login />}
+            {isAuthenticated && current === "1" && <Calendar />}
+            {isAuthenticated && current === "2" && <Users />}
           </Content>
         </Layout>
       </Content>
