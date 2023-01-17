@@ -41,4 +41,6 @@ router.post("/login", authController.login);
 
 router.get("/users", authController.getUsers);
 
+router.delete('/users/:userId', authController.deleteUser);
+
 module.exports = router;

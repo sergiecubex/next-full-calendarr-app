@@ -6,40 +6,34 @@ const isAuth = require('../middleware/is-auth');
 
 const router = express.Router();
 
-// GET /feed/docs
-router.get('/docs', isAuth, feedController.getEvents);
+// GET /feed/events
+router.get('/events', isAuth, feedController.getEvents);
 
-// POST /feed/doc
+// POST /feed/event
 router.post(
-  '/doc',
+  '/event',
   isAuth,
   [
     body('title')
       .trim()
       .isLength({ min: 5 }),
-    body('content')
-      .trim()
-      .isLength({ min: 5 })
   ],
   feedController.createEvent
 );
 
-router.get('/doc/:postId', isAuth, feedController.getEvent);
+router.get('/event/:eventId', isAuth, feedController.getEvent);
 
 router.put(
-  '/doc/:docId',
+  '/event/:eventId',
   isAuth,
   [
     body('title')
       .trim()
       .isLength({ min: 5 }),
-    body('content')
-      .trim()
-      .isLength({ min: 5 })
   ],
   feedController.updateEvent
 );
 
-router.delete('/doc/:docId', isAuth, feedController.deleteEvent);
+router.delete('/event/:eventId', isAuth, feedController.deleteEvent);
 
 module.exports = router;

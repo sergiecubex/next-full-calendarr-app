@@ -9,7 +9,7 @@ interface Params {
 
 const Login: React.FC = (props: any) => {
   const dispatch: (arg: any) => void = useDispatch();
-console.log(props.editUser)
+
   const onFinish = (values: Params) => {
     if (!!props.addUser) {
       // @ts-ignore

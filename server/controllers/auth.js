@@ -96,7 +96,6 @@ exports.deleteUser = (req, res, next) => {
       return User.findByIdAndRemove(userId);
     })
     .then(result => {
-      console.log(result);
       res.status(200).json({ message: 'Deleted user.' });
     })
     .catch(err => {
